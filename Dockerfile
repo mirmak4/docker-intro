@@ -3,11 +3,14 @@ FROM node
 # execute all below commands in this root directory
 WORKDIR /app
 
-# now this dest path points to our WORKDIR
-COPY . /app
+# if package.json changed, only then execute npm install 
+COPY package.json /app
 
 # RUN command executes when image is created (no container yet)
 RUN npm install
+
+# now this dest path points to our WORKDIR
+COPY . /app
 
 # expose port so that we can communicate with our app inside container
 # this is optional, remote port of the container
